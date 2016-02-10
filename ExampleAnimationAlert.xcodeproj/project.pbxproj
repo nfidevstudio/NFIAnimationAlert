@@ -15,6 +15,7 @@
 		F21549941C6B33E30042905C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21549921C6B33E30042905C /* LaunchScreen.storyboard */; };
 		F215499F1C6B33E30042905C /* ExampleAnimationAlertTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F215499E1C6B33E30042905C /* ExampleAnimationAlertTests.m */; };
 		F21549AA1C6B33E30042905C /* ExampleAnimationAlertUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F21549A91C6B33E30042905C /* ExampleAnimationAlertUITests.m */; };
+		F21549C01C6B34C30042905C /* JEAnimationAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F21549BF1C6B34C30042905C /* JEAnimationAlert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		F21549A51C6B33E30042905C /* ExampleAnimationAlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleAnimationAlertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21549A91C6B33E30042905C /* ExampleAnimationAlertUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleAnimationAlertUITests.m; sourceTree = "<group>"; };
 		F21549AB1C6B33E30042905C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F21549BE1C6B34C30042905C /* JEAnimationAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEAnimationAlert.h; sourceTree = "<group>"; };
+		F21549BF1C6B34C30042905C /* JEAnimationAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEAnimationAlert.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,25 +104,12 @@
 		F21549831C6B33E30042905C /* ExampleAnimationAlert */ = {
 			isa = PBXGroup;
 			children = (
-				F21549871C6B33E30042905C /* AppDelegate.h */,
-				F21549881C6B33E30042905C /* AppDelegate.m */,
-				F215498A1C6B33E30042905C /* ViewController.h */,
-				F215498B1C6B33E30042905C /* ViewController.m */,
-				F215498D1C6B33E30042905C /* Main.storyboard */,
-				F21549901C6B33E30042905C /* Assets.xcassets */,
-				F21549921C6B33E30042905C /* LaunchScreen.storyboard */,
-				F21549951C6B33E30042905C /* Info.plist */,
-				F21549841C6B33E30042905C /* Supporting Files */,
+				F21549BC1C6B34370042905C /* Resources */,
+				F21549BB1C6B34310042905C /* Source */,
+				F21549BA1C6B341A0042905C /* Interface */,
+				F21549B91C6B340D0042905C /* Artwork */,
 			);
 			path = ExampleAnimationAlert;
-			sourceTree = "<group>";
-		};
-		F21549841C6B33E30042905C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F21549851C6B33E30042905C /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F215499D1C6B33E30042905C /* ExampleAnimationAlertTests */ = {
@@ -138,6 +128,69 @@
 				F21549AB1C6B33E30042905C /* Info.plist */,
 			);
 			path = ExampleAnimationAlertUITests;
+			sourceTree = "<group>";
+		};
+		F21549B71C6B33F90042905C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F215498A1C6B33E30042905C /* ViewController.h */,
+				F215498B1C6B33E30042905C /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F21549B81C6B34020042905C /* AppDelgate & Main */ = {
+			isa = PBXGroup;
+			children = (
+				F21549851C6B33E30042905C /* main.m */,
+				F21549871C6B33E30042905C /* AppDelegate.h */,
+				F21549881C6B33E30042905C /* AppDelegate.m */,
+			);
+			name = "AppDelgate & Main";
+			sourceTree = "<group>";
+		};
+		F21549B91C6B340D0042905C /* Artwork */ = {
+			isa = PBXGroup;
+			children = (
+				F21549901C6B33E30042905C /* Assets.xcassets */,
+			);
+			name = Artwork;
+			sourceTree = "<group>";
+		};
+		F21549BA1C6B341A0042905C /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				F215498D1C6B33E30042905C /* Main.storyboard */,
+				F21549921C6B33E30042905C /* LaunchScreen.storyboard */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		F21549BB1C6B34310042905C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F21549BD1C6B34450042905C /* AnimationAlert */,
+				F21549B81C6B34020042905C /* AppDelgate & Main */,
+				F21549B71C6B33F90042905C /* Controllers */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		F21549BC1C6B34370042905C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F21549951C6B33E30042905C /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F21549BD1C6B34450042905C /* AnimationAlert */ = {
+			isa = PBXGroup;
+			children = (
+				F21549BE1C6B34C30042905C /* JEAnimationAlert.h */,
+				F21549BF1C6B34C30042905C /* JEAnimationAlert.m */,
+			);
+			name = AnimationAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21549C01C6B34C30042905C /* JEAnimationAlert.m in Sources */,
 				F215498C1C6B33E30042905C /* ViewController.m in Sources */,
 				F21549891C6B33E30042905C /* AppDelegate.m in Sources */,
 				F21549861C6B33E30042905C /* main.m in Sources */,
