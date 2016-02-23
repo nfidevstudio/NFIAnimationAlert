@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NFIAnimationAlert.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewDidLayoutSubviews {
+    NFIAnimationAlert *alert = [[NFIAnimationAlert alloc] initTitleAlertWithSize:CGSizeMake(self.view.frame.size.width, 100)
+                                                                           title:@"Proba"
+                                                                       viewStyle:NFIAnimationAlertStyleDark
+                                                                      enterStyle:NFIEnterAnimationStyleFadeIn
+                                                                       exitStyle:NFIExitAnimationStyleFadeOut
+                                                                          inView:self.view
+                                                                     andShowTime:10.0];
+    
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {

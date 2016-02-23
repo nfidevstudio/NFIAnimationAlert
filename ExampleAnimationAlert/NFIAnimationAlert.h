@@ -1,5 +1,5 @@
 //
-//  JEAnimationAlert.h
+//  NFIAnimationAlert.h
 //  ExampleAnimationAlert
 //
 //  Created by José Carlos on 10/2/16.
@@ -8,22 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM (NSInteger, JEAnimationAlertStyle) {
-    JEAnimationAlertStyleCustom,
-    JEAnimationAlertStyleDark,
-    JEAnimationAlertStyleLight
+typedef NS_ENUM (NSInteger, NFIAnimationAlertStyle) {
+    NFIAnimationAlertStyleCustom,
+    NFIAnimationAlertStyleDark,
+    NFIAnimationAlertStyleLight
 };
 
-typedef NS_ENUM (NSInteger, JEAnimationAlertAnimationStyle) {
-    JEAnimationAlertAnimationStyleFromBottomToTop,
-    JEAnimationAlertAnimationStyleFromTopToBottom,
-    JEAnimationAlertAnimationStyleFromBottomToRight,
-    JEAnimationAlertAnimationStyleFromBottomToLeft,
-    JEAnimationAlertAnimationStyleFromTopToRight,
-    JEAnimationAlertAnimationStyleFromTopToLeft
+typedef NS_ENUM (NSInteger, NFIEnterAnimationStyle) {
+    NFIEnterAnimationStyleFromBottomToTop,
+    NFIEnterAnimationStyleFromTopToBottom,
+    NFIEnterAnimationStyleFromBottomToRight,
+    NFIEnterAnimationStyleFromBottomToLeft,
+    NFIEnterAnimationStyleFromTopToRight,
+    NFIEnterAnimationStyleFromTopToLeft
 };
 
-@interface JEAnimationAlert : UIView
+typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
+    NFIExitAnimationStyleToTop,
+    NFIExitAnimationStyleToBottom,
+    NFIExitAnimationStyleToRight,
+    NFIExitAnimationStyleToLeft
+};
+
+@interface NFIAnimationAlert : UIView
 
 #pragma mark - Init AnimationAlert
 
@@ -41,8 +48,9 @@ typedef NS_ENUM (NSInteger, JEAnimationAlertAnimationStyle) {
 - (instancetype)initTitleMessageAlertWithSize:(CGSize)size
                                         title:(NSString *)title
                                       message:(NSString *)message
-                                    viewStyle:(JEAnimationAlertStyle)style
-                                    showStyle:(JEAnimationAlertAnimationStyle)showStyle
+                                    viewStyle:(NFIAnimationAlertStyle)style
+                                    enterStyle:(NFIEnterAnimationStyle)enterStyle
+                                    exitStyle:(NFIExitAnimationStyle)exitStyle
                                        inView:(UIView *)view
                                   andShowTime:(CGFloat)time;
 
@@ -59,8 +67,9 @@ typedef NS_ENUM (NSInteger, JEAnimationAlertAnimationStyle) {
  */
 - (instancetype)initTitleAlertWithSize:(CGSize)size
                                  title:(NSString *)title
-                             viewStyle:(JEAnimationAlertStyle)style
-                             showStyle:(JEAnimationAlertAnimationStyle)showStyle
+                             viewStyle:(NFIAnimationAlertStyle)style
+                            enterStyle:(NFIEnterAnimationStyle)enterStyle
+                             exitStyle:(NFIExitAnimationStyle)exitStyle
                                        inView:(UIView *)view
                                   andShowTime:(CGFloat)time;
 
@@ -77,8 +86,9 @@ typedef NS_ENUM (NSInteger, JEAnimationAlertAnimationStyle) {
  */
 - (instancetype)initCustomAlertWithSize:(CGSize)size
                              customView:(UIView *)view
-                              viewStyle:(JEAnimationAlertStyle)style
-                              showStyle:(JEAnimationAlertAnimationStyle)showStyle
+                              viewStyle:(NFIAnimationAlertStyle)style
+                             enterStyle:(NFIEnterAnimationStyle)enterStyle
+                              exitStyle:(NFIExitAnimationStyle)exitStyle
                                 inView:(UIView *)view
                            andShowTime:(CGFloat)time;
 

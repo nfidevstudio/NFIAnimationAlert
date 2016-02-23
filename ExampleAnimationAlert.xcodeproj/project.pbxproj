@@ -15,7 +15,7 @@
 		F21549941C6B33E30042905C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21549921C6B33E30042905C /* LaunchScreen.storyboard */; };
 		F215499F1C6B33E30042905C /* ExampleAnimationAlertTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F215499E1C6B33E30042905C /* ExampleAnimationAlertTests.m */; };
 		F21549AA1C6B33E30042905C /* ExampleAnimationAlertUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F21549A91C6B33E30042905C /* ExampleAnimationAlertUITests.m */; };
-		F21549C01C6B34C30042905C /* JEAnimationAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F21549BF1C6B34C30042905C /* JEAnimationAlert.m */; };
+		F21549C01C6B34C30042905C /* NFIAnimationAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = F21549BF1C6B34C30042905C /* NFIAnimationAlert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,8 @@
 		F21549A51C6B33E30042905C /* ExampleAnimationAlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleAnimationAlertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21549A91C6B33E30042905C /* ExampleAnimationAlertUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleAnimationAlertUITests.m; sourceTree = "<group>"; };
 		F21549AB1C6B33E30042905C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F21549BE1C6B34C30042905C /* JEAnimationAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEAnimationAlert.h; sourceTree = "<group>"; };
-		F21549BF1C6B34C30042905C /* JEAnimationAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEAnimationAlert.m; sourceTree = "<group>"; };
+		F21549BE1C6B34C30042905C /* NFIAnimationAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFIAnimationAlert.h; sourceTree = "<group>"; };
+		F21549BF1C6B34C30042905C /* NFIAnimationAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFIAnimationAlert.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,8 +187,8 @@
 		F21549BD1C6B34450042905C /* AnimationAlert */ = {
 			isa = PBXGroup;
 			children = (
-				F21549BE1C6B34C30042905C /* JEAnimationAlert.h */,
-				F21549BF1C6B34C30042905C /* JEAnimationAlert.m */,
+				F21549BE1C6B34C30042905C /* NFIAnimationAlert.h */,
+				F21549BF1C6B34C30042905C /* NFIAnimationAlert.m */,
 			);
 			name = AnimationAlert;
 			sourceTree = "<group>";
@@ -323,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F21549C01C6B34C30042905C /* JEAnimationAlert.m in Sources */,
+				F21549C01C6B34C30042905C /* NFIAnimationAlert.m in Sources */,
 				F215498C1C6B33E30042905C /* ViewController.m in Sources */,
 				F21549891C6B33E30042905C /* AppDelegate.m in Sources */,
 				F21549861C6B33E30042905C /* main.m in Sources */,
@@ -552,6 +552,7 @@
 				F21549B01C6B33E30042905C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F21549B11C6B33E30042905C /* Build configuration list for PBXNativeTarget "ExampleAnimationAlertTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +561,7 @@
 				F21549B31C6B33E30042905C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F21549B41C6B33E30042905C /* Build configuration list for PBXNativeTarget "ExampleAnimationAlertUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +570,7 @@
 				F21549B61C6B33E30042905C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
