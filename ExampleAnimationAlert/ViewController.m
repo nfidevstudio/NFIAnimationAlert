@@ -17,18 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NFIAnimationAlert *alert = [[NFIAnimationAlert alloc] initTitleMessageAlertWithSize:CGSizeMake(self.view.frame.size.width, 80)
+                                                                                  title:@"Example Title"
+                                                                                message:@"This is a example of a message"
+                                                                              viewStyle:NFIAnimationAlertStyleBlue
+                                                                             enterStyle:NFIEnterAnimationStyleFromBottomToTop
+                                                                              exitStyle:NFIExitAnimationStyleToRight
+                                                                                 inView:self.view
+                                                                            andShowTime:1.0];
+    [alert show];
 }
 
 -(void)viewDidLayoutSubviews {
-    NFIAnimationAlert *alert = [[NFIAnimationAlert alloc] initTitleAlertWithSize:CGSizeMake(self.view.frame.size.width, 100)
-                                                                           title:@"Proba"
-                                                                       viewStyle:NFIAnimationAlertStyleDark
-                                                                      enterStyle:NFIEnterAnimationStyleFadeIn
-                                                                       exitStyle:NFIExitAnimationStyleFadeOut
-                                                                          inView:self.view
-                                                                     andShowTime:10.0];
-    
-    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {

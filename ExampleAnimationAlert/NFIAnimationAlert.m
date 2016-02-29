@@ -14,6 +14,14 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
     NFIAnimationAlertTypeTitle
 };
 
+
+typedef NS_ENUM (NSInteger, NFIAnimationType) {
+    NFIAnimationTypeEnter,
+    NFIAnimationTypeExit
+};
+
+#define RGB(r,g,b)[[UIColor alloc] initWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]
+
 @interface NFIAnimationAlert ()
 
 @property (nonatomic, strong) UIView *containerView;
@@ -123,7 +131,7 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
 #pragma mark - Public method
 
 - (void)show {
-    self.frame = [self fromRect];
+    self.frame = [self fromRect:NFIAnimationTypeEnter];
     [_containerView addSubview:self];
     
     if (_hideTouch) {
@@ -157,6 +165,14 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
     _hideTouch = enabled;
 }
 
+- (void)configureTitleFont:(UIFont *)font {
+    _title.font = font;
+}
+
+- (void)configureMessageFont:(UIFont *)font {
+    _message.font = font;
+}
+
 #pragma mark - Private methods
 
 - (void)configureView {
@@ -176,7 +192,6 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
     
     switch (_style) {
         case NFIAnimationAlertStyleCustom:
-            
             break;
             
         case NFIAnimationAlertStyleDark:
@@ -187,6 +202,27 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
             
         case NFIAnimationAlertStyleLight:
             [self configureBackgroundColor:[UIColor whiteColor]];
+            [self configureTitleColor:[UIColor darkGrayColor]];
+            [self configureMessageColor:[UIColor darkGrayColor]];
+            break;
+            
+        case NFIAnimationAlertStyleGreen:
+            [self configureBackgroundColor:RGB(102.0,255.0,102.0)];
+            [self configureTitleColor:[UIColor whiteColor]];
+            [self configureMessageColor:[UIColor whiteColor]];
+            break;
+        case NFIAnimationAlertStyleRed:
+            [self configureBackgroundColor:RGB(255.0,51.0,51.0)];
+            [self configureTitleColor:[UIColor whiteColor]];
+            [self configureMessageColor:[UIColor whiteColor]];
+            break;
+        case NFIAnimationAlertStyleBlue:
+            [self configureBackgroundColor:RGB(51.0,153.0,255.0)];
+            [self configureTitleColor:[UIColor whiteColor]];
+            [self configureMessageColor:[UIColor whiteColor]];
+            break;
+        case NFIAnimationAlertStyleYellow:
+            [self configureBackgroundColor:RGB(255.0,255.0,102.0)];
             [self configureTitleColor:[UIColor darkGrayColor]];
             [self configureMessageColor:[UIColor darkGrayColor]];
             break;
@@ -205,6 +241,8 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
 - (void)configureTitleMessageAlert {
     _title = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.frame.size.width, self.frame.size.height / 2)];
     _message = [[UILabel alloc] initWithFrame:CGRectMake(10, self.frame.size.height / 2, self.frame.size.width, self.frame.size.height / 2)];
+    _title.font = [UIFont boldSystemFontOfSize:15.0];
+    _message.font = [UIFont systemFontOfSize:14.0];
     [self addSubview:_title];
     [self addSubview:_message];
 }
@@ -221,49 +259,63 @@ typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
 
 -(void)hide:(NSTimer *)timer {
     [UIView animateWithDuration:1.0 animations:^{
-        self.frame = [self fromRect];
+        self.frame = [self fromRect:NFIAnimationTypeExit];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
 }
 
 
-- (CGRect)fromRect {
-    switch (_enterStyle) {
-        case NFIEnterAnimationStyleFromBottomToLeft:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIEnterAnimationStyleFromBottomToRight:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIEnterAnimationStyleFromBottomToTop:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIEnterAnimationStyleFromTopToBottom:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIEnterAnimationStyleFromTopToLeft:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIEnterAnimationStyleFromTopToRight:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
+- (CGRect)fromRect:(NFIAnimationType)animation {
+    if (animation == NFIAnimationTypeEnter) {
+        switch (_enterStyle) {
+            case NFIEnterAnimationStyleFromBottomToLeft:
+                return CGRectMake(+_originalSize.width, _containerView.frame.size.height - _originalSize.height, _originalSize.width, _originalSize.height);
+                
+            case NFIEnterAnimationStyleFromBottomToRight:
+                return CGRectMake(-_originalSize.width,_containerView.frame.size.height - _originalSize.height, _originalSize.width, _originalSize.height);
+                
+            case NFIEnterAnimationStyleFromBottomToTop:
+                return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
+                
+            case NFIEnterAnimationStyleFromTopToBottom:
+                return CGRectMake(0,- _originalSize.height, _originalSize.width, _originalSize.height);
+                
+            case NFIEnterAnimationStyleFromTopToLeft:
+                return CGRectMake(+_originalSize.width,0, _originalSize.width, _originalSize.height);
+                
+            case NFIEnterAnimationStyleFromTopToRight:
+                return CGRectMake(-_originalSize.width, 0, _originalSize.width, _originalSize.height);
+        }
+    } else {
+        switch (_exitStyle) {
+            case NFIExitAnimationStyleToRight:
+                return CGRectMake(_containerView.frame.size.width + _originalSize.width,self.frame.origin.y, _originalSize.width, _originalSize.height);
+                
+            case NFIExitAnimationStyleToBottom:
+                return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
+                
+            case NFIExitAnimationStyleToLeft:
+                return CGRectMake(-_originalSize.width, self.frame.origin.y, _originalSize.width, _originalSize.height);
+                
+            case NFIExitAnimationStyleToTop:
+                return CGRectMake(0,-_originalSize.height, _originalSize.width, _originalSize.height);
+        }
     }
     return CGRectZero;
 }
 
 - (CGRect)toRect {
-    switch (_exitStyle) {
-        case NFIExitAnimationStyleToRight:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
+    switch (_enterStyle) {
+        case NFIEnterAnimationStyleFromBottomToLeft:
+        case NFIEnterAnimationStyleFromBottomToRight:
+        case NFIEnterAnimationStyleFromBottomToTop:
+            return CGRectMake(0,_containerView.frame.size.height - _originalSize.height, _originalSize.width, _originalSize.height);
             
-        case NFIExitAnimationStyleToBottom:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-
-        case NFIExitAnimationStyleToLeft:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
-            
-        case NFIExitAnimationStyleToTop:
-            return CGRectMake(0,_containerView.frame.size.height + _originalSize.height, _originalSize.width, _originalSize.height);
+        case NFIEnterAnimationStyleFromTopToBottom:
+        case NFIEnterAnimationStyleFromTopToLeft:
+        case NFIEnterAnimationStyleFromTopToRight:
+            return CGRectMake(0,0, _originalSize.width, _originalSize.height);
     }
     return CGRectZero;
 }

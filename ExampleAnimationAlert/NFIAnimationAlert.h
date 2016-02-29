@@ -11,7 +11,11 @@
 typedef NS_ENUM (NSInteger, NFIAnimationAlertStyle) {
     NFIAnimationAlertStyleCustom,
     NFIAnimationAlertStyleDark,
-    NFIAnimationAlertStyleLight
+    NFIAnimationAlertStyleLight,
+    NFIAnimationAlertStyleRed,
+    NFIAnimationAlertStyleBlue,
+    NFIAnimationAlertStyleGreen,
+    NFIAnimationAlertStyleYellow
 };
 
 typedef NS_ENUM (NSInteger, NFIEnterAnimationStyle) {
@@ -116,9 +120,18 @@ typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
 - (void)configureMessageColor:(UIColor *)color;
 
 /**
+ *  Configure the title font.
+ */
+- (void)configureTitleFont:(UIFont *)font;
+
+/**
+ *  Configure the message font.
+ */
+- (void)configureMessageFont:(UIFont *)font;
+
+/**
  *  Set to NO if you dont want to hide the view if touch inside of it
  */
 - (void)touchToHideEnabled:(BOOL)enabled;
-
 
 @end
