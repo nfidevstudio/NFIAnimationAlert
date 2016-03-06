@@ -11,7 +11,8 @@
 typedef NS_ENUM (NSInteger, NFIAnimationAlertType) {
     NFIAnimationAlertTypeCustom,
     NFIAnimationAlertTypeTitleMessage,
-    NFIAnimationAlertTypeTitle
+    NFIAnimationAlertTypeTitle,
+    NFIAnimationAlertTypeLoadingAlert
 };
 
 
@@ -22,8 +23,14 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
 
 #define RGB(r,g,b)[[UIColor alloc] initWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]
 
+#define RED_COLOR RGB(255.0,51.0,51.0)
+#define GREEN_COLOR RGB(102.0,255.0,102.0)
+#define BLUE_COLOR RGB(51.0,153.0,255.0)
+#define YELLOW_COLOR RGB(255.0,255.0,102.0)
+
 @interface NFIAnimationAlert ()
 
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *message;
@@ -80,6 +87,24 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
                         inView:containerView
                    andShowTime:time];
     
+}
+
+- (instancetype)initLoadingAlertWithSize:(CGSize)size
+                                   title:(NSString *)title
+                               viewStyle:(NFIAnimationAlertStyle)style
+                              enterStyle:(NFIEnterAnimationStyle)enterStyle
+                               exitStyle:(NFIExitAnimationStyle)exitStyle
+                                  inView:(UIView *)containerView
+                             andShowTime:(CGFloat)time {
+    return [self initWithFrame:CGRectMake(0, 0, size.width, size.height)
+                     alertType:NFIAnimationAlertTypeLoadingAlert
+                         title:title
+                       message:nil
+                     viewStyle:style
+                    enterStyle:enterStyle
+                     exitStyle:exitStyle
+                        inView:containerView
+                   andShowTime:time];
 }
 
 
@@ -142,11 +167,17 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
     [UIView animateWithDuration:1.0 animations:^{
         self.frame = [self toRect];
     } completion:^(BOOL finished) {
-        NSTimer * timer = [[NSTimer alloc]initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:_hideTime]
-                                                  interval:0.0f target:self selector:@selector(hide:)
-                                                  userInfo:nil repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        if (_hideTime > 0) {
+            NSTimer * timer = [[NSTimer alloc]initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:_hideTime]
+                                                      interval:0.0f target:self selector:@selector(hide:)
+                                                      userInfo:nil repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        }
     }];
+}
+
+- (void)hide {
+    [self hide:nil];
 }
 
 - (void)configureBackgroundColor:(UIColor *)color {
@@ -173,6 +204,12 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
     _message.font = font;
 }
 
+- (void)configureLoadingIndicatorColor:(UIColor *)color {
+    if (_indicatorView) {
+        _indicatorView.color = color;
+    }
+}
+
 #pragma mark - Private methods
 
 - (void)configureView {
@@ -188,6 +225,10 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
         case NFIAnimationAlertTypeTitleMessage:
             [self configureTitleMessageAlert];
             break;
+            
+        case NFIAnimationAlertTypeLoadingAlert:
+            [self configureLoadingAlert];
+            break;
     }
     
     switch (_style) {
@@ -196,33 +237,39 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
             
         case NFIAnimationAlertStyleDark:
             [self configureBackgroundColor:[UIColor darkGrayColor]];
+            [self configureLoadingIndicatorColor:[UIColor darkGrayColor]];
             [self configureTitleColor:[UIColor whiteColor]];
             [self configureMessageColor:[UIColor whiteColor]];
             break;
             
         case NFIAnimationAlertStyleLight:
             [self configureBackgroundColor:[UIColor whiteColor]];
+            [self configureLoadingIndicatorColor:[UIColor darkGrayColor]];
             [self configureTitleColor:[UIColor darkGrayColor]];
             [self configureMessageColor:[UIColor darkGrayColor]];
             break;
             
         case NFIAnimationAlertStyleGreen:
-            [self configureBackgroundColor:RGB(102.0,255.0,102.0)];
+            [self configureBackgroundColor:GREEN_COLOR];
+            [self configureLoadingIndicatorColor:[UIColor whiteColor]];
             [self configureTitleColor:[UIColor whiteColor]];
             [self configureMessageColor:[UIColor whiteColor]];
             break;
         case NFIAnimationAlertStyleRed:
-            [self configureBackgroundColor:RGB(255.0,51.0,51.0)];
+            [self configureBackgroundColor:RED_COLOR];
+            [self configureLoadingIndicatorColor:[UIColor whiteColor]];
             [self configureTitleColor:[UIColor whiteColor]];
             [self configureMessageColor:[UIColor whiteColor]];
             break;
         case NFIAnimationAlertStyleBlue:
-            [self configureBackgroundColor:RGB(51.0,153.0,255.0)];
+            [self configureBackgroundColor:BLUE_COLOR];
+            [self configureLoadingIndicatorColor:[UIColor whiteColor]];
             [self configureTitleColor:[UIColor whiteColor]];
             [self configureMessageColor:[UIColor whiteColor]];
             break;
         case NFIAnimationAlertStyleYellow:
-            [self configureBackgroundColor:RGB(255.0,255.0,102.0)];
+            [self configureBackgroundColor:YELLOW_COLOR];
+            [self configureLoadingIndicatorColor:[UIColor whiteColor]];
             [self configureTitleColor:[UIColor darkGrayColor]];
             [self configureMessageColor:[UIColor darkGrayColor]];
             break;
@@ -253,6 +300,16 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
     [self addSubview:_title];
 }
 
+- (void)configureLoadingAlert {
+    _title = [[UILabel alloc] initWithFrame:CGRectMake(50, self.frame.size.height / 2 - 50, self.frame.size.width - 10, 100)];
+    _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _indicatorView.frame = CGRectMake(10, self.frame.size.height / 2 - 20, 40, 40);
+    _indicatorView.backgroundColor = [UIColor clearColor];
+    [_indicatorView startAnimating];
+    [self addSubview:_indicatorView];
+    [self addSubview:_title];
+}
+
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     [self hide:nil];
 }
@@ -264,7 +321,6 @@ typedef NS_ENUM (NSInteger, NFIAnimationType) {
         [self removeFromSuperview];
     }];
 }
-
 
 - (CGRect)fromRect:(NFIAnimationType)animation {
     if (animation == NFIAnimationTypeEnter) {

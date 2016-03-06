@@ -77,6 +77,25 @@ typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
                                        inView:(UIView *)view
                                   andShowTime:(CGFloat)time;
 
+/**
+ *  Init the Alert view. This method not show the alert, call [alert show] once initialized
+ *
+ *  @param title
+ *  @param message
+ *  @param showStyle
+ *  @param hideTime
+ *  @param view
+ *
+ *  @return
+ */
+- (instancetype)initLoadingAlertWithSize:(CGSize)size
+                                 title:(NSString *)title
+                             viewStyle:(NFIAnimationAlertStyle)style
+                            enterStyle:(NFIEnterAnimationStyle)enterStyle
+                             exitStyle:(NFIExitAnimationStyle)exitStyle
+                                inView:(UIView *)view
+                           andShowTime:(CGFloat)time;
+
 
 #pragma mark - Public method
 
@@ -84,6 +103,11 @@ typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
  *  Show the alert
  */
 - (void)show;
+
+/**
+ * Hide the alert with exit animation
+ */
+- (void)hide;
 
 /**
  *  Configure the background color
@@ -99,6 +123,11 @@ typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
  *  Configure the message color.
  */
 - (void)configureMessageColor:(UIColor *)color;
+
+/**
+ *  Configure the loading indicator color.
+ */
+- (void)configureLoadingIndicatorColor:(UIColor *)color;
 
 /**
  *  Configure the title font.

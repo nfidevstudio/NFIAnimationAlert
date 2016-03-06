@@ -11,21 +11,32 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NFIAnimationAlert *alert;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NFIAnimationAlert *alert = [[NFIAnimationAlert alloc] initTitleMessageAlertWithSize:CGSizeMake(self.view.frame.size.width, 80)
+    _alert = [[NFIAnimationAlert alloc] initLoadingAlertWithSize:CGSizeMake(self.view.frame.size.width, 80)
                                                                                   title:@"Example Title"
-                                                                                message:@"This is a example of a message"
                                                                               viewStyle:NFIAnimationAlertStyleBlue
                                                                              enterStyle:NFIEnterAnimationStyleFromBottomToTop
                                                                               exitStyle:NFIExitAnimationStyleToRight
                                                                                  inView:self.view
-                                                                            andShowTime:1.0];
-    [alert show];
+                                                                            andShowTime:0];
+    [_alert show];
+    
+    
+    NSTimer * timer = [[NSTimer alloc]initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:5]
+                                              interval:0.0f target:self selector:@selector(hide:)
+                                              userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+-(void)hide:(NSTimer *)timer {
+    [_alert hide];
 }
 
 -(void)viewDidLayoutSubviews {
