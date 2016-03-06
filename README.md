@@ -2,6 +2,9 @@
 
 ### Show custom pretty alerts
 
+![](https://github.com/nfiframeworks/NFIAnimationAlert/blob/master/ExampleAnimationAlert/Screenshots/screenshot_1.png?raw=true)
+![](https://github.com/nfiframeworks/NFIAnimationAlert/blob/master/ExampleAnimationAlert/Screenshots/screenshot_2.png?raw=true)
+
 First, import:
 
 ```Objective-c
