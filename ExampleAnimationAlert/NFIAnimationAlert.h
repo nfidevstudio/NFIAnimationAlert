@@ -77,25 +77,6 @@ typedef NS_ENUM (NSInteger, NFIExitAnimationStyle) {
                                        inView:(UIView *)view
                                   andShowTime:(CGFloat)time;
 
-/**
- *  Init the Alert view. This method not show the alert, call [alert show] once initialized
- *
- *  @param title
- *  @param message
- *  @param showStyle
- *  @param hideTime
- *  @param view
- *
- *  @return
- */
-- (instancetype)initCustomAlertWithSize:(CGSize)size
-                             customView:(UIView *)view
-                              viewStyle:(NFIAnimationAlertStyle)style
-                             enterStyle:(NFIEnterAnimationStyle)enterStyle
-                              exitStyle:(NFIExitAnimationStyle)exitStyle
-                                inView:(UIView *)view
-                           andShowTime:(CGFloat)time;
-
 
 #pragma mark - Public method
 
